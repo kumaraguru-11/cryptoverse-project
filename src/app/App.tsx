@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <ErrorBoundary>
-        <BrowserRouter>
+        <BrowserRouter basename="/cryptoverse-project">
           <Sidebar />
           <div className="Route">
             <Provider store={store}>
