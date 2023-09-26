@@ -1,39 +1,153 @@
+/* -----Hide ScrollBar---- */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ----Global Style--- */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.Route {
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+/* -----root element----- */
+:root {
+  --transition: 0.5s ease-in-out;
 }
 
-@keyframes App-logo-float {
+/* ----Loader---- */
+.loader {
+  transform: translateZ(1px);
+}
+.loader:after {
+  content: '$';
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  text-align: center;
+  line-height:40px;
+  font-size: 32px;
+  font-weight: bold;
+  background: #FFD700;
+  color: #DAA520;
+  border: 4px double ;
+  box-sizing: border-box;
+  box-shadow:  2px 2px 2px 1px rgba(0, 0, 0, .1);
+  animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes coin-flip {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
   0% {
-    transform: translateY(0);
+    transform: rotateY(0deg);
   }
   50% {
-    transform: translateY(10px);
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
   }
   100% {
-    transform: translateY(0px);
+    transform: rotateY(3600deg);
+  }
+}
+      
+/* ------Sidebar----- */
+.sidebar_menu {
+  height: auto;
+  min-height: 100vh;
+  min-width: 250px;
+  transition: var(--transition);
+  z-index: 10;
+}
+.sidebar_btn {
+  position: fixed;
+  bottom: 0;
+  min-width: 250px;
+  border: 1px solid black;
+  transition: var(--transition);
+}
+
+/* -----sidebar Toggle----- */
+.Toggle_sidebar,
+.Toggle_sidebar_btn {
+  min-width: 90px;
+  transition: var(--transition);
+}
+.Toggle_sidebar .sidebar_items span:nth-child(2),
+.Toggle_sidebar span h3 {
+  display: none;
+}
+.Toggle_sidebar .sidebar_items span:nth-child(1),
+.Toggle_sidebar span img {
+  margin-left: 16px;
+}
+
+/* -----NavBar----- */
+.NavBar {
+  height: 80px;
+  background-color: #fff;
+}
+.NavBar_Select {
+  width: 50%;
+}
+
+/* -----CardLink Design----- */
+.Card_Link,
+.CoinDetails_link {
+  color: black;
+}
+.Card_Link:hover,
+.CoinDetails_link:hover,
+.NewsCard_Title:hover {
+  color: blue;
+}
+
+.Delete_btn:hover {
+  color: red;
+}
+
+/*pagination */
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+}
+
+.pagination .page-num {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.Spinner_Placement{
+  height:90%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+@media screen and (max-width: 850px) {
+  .sidebar_menu,
+  .sidebar_btn {
+    min-width: 90px;
+    transition: var(--transition);
+  }
+  .sidebar_menu .sidebar_items span:nth-child(2),
+  .sidebar_menu span h3 {
+    display: none;
+    transition: var(--transition);
+  }
+  .sidebar_menu .sidebar_items span:nth-child(1),
+  .sidebar_menu span img {
+    margin-left: 16px;
   }
 }
