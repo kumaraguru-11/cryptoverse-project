@@ -1,17 +1,17 @@
-import React from 'react'
+import React from "react";
 
-const Home=React.lazy(()=>import('../pages/Home'));
-const Currency=React.lazy(()=>import('../pages/Currency'));
-const RefrenceCurrency=React.lazy(()=>import('../pages/RefrenceCurrency'));
-const News=React.lazy(()=>import('../pages/News'));
-const Market=React.lazy(()=>import('../pages/CryptoMarket'));
-const Exchange=React.lazy(()=>import('../pages/CryptoExchange'));
-const CoinDetail=React.lazy(()=>import ('../pages/CoinDetails'));
-const Page404=React.lazy(()=>import('../pages/PageNotFound'));
+const Home = React.lazy(() => import("../pages/Home"));
+const Currency = React.lazy(() => import("../pages/Currency"));
+const RefrenceCurrency = React.lazy(() => import("../pages/RefrenceCurrency"));
+const News = React.lazy(() => import("../pages/News"));
+const Market = React.lazy(() => import("../pages/CryptoMarket"));
+const Exchange = React.lazy(() => import("../pages/CryptoExchange"));
+const CoinDetail = React.lazy(() => import("../pages/CoinDetails"));
+const Page404 = React.lazy(() => import("../pages/PageNotFound"));
 
 export const PUBLIC_ROUTES = [
   {
-    path: "/",
+    path: "/cryptoverse-project/",
     component: Home,
   },
   {
