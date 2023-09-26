@@ -11,7 +11,7 @@ const Page404 = React.lazy(() => import("../pages/PageNotFound"));
 
 export const PUBLIC_ROUTES = [
   {
-    path: "/cryptoverse-project/",
+    path: "/",
     component: Home,
   },
   {
