@@ -44,8 +44,8 @@ const Home = () => {
               <div className="mt-3">
                 <CryptoCard coins={data.data.coins} />
               </div>
-              <h3 className="fw-normal mt-3"> Latest Cryptocurrencies News</h3>
-              <div className="my-3"><NewsList feeds={feeds.value}/></div>
+              {/* <h3 className="fw-normal mt-3"> Latest Cryptocurrencies News</h3>
+              <div className="my-3"><NewsList feeds={feeds.value}/></div> */}
             </div>
           </div>
         </>
