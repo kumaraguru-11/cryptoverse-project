@@ -34,7 +34,6 @@ const CryptoMarket = () => {
   const { isLoading, error, data } = useGetCoinMarketsQuery({
     coinId: params?.coinId,
   });
-  console.log(data)
   const columns: TableColumn<MarketDataRow>[] = [
     {
       name: "Rank",

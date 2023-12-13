@@ -18,11 +18,11 @@ const Home = () => {
   });
   return (
     <AsyncWrapper
-      fulfilled={Boolean(data && feeds)}
-      error={error || feedserror}
-      loading={isLoading || feedsLoading}
+      fulfilled={Boolean(data)}
+      error={error}
+      loading={isLoading}
     >
-      {Boolean(data && feeds) && (
+      {Boolean(data) && (
         <>
           <div className="p-4 my-3">
             <h4 className="fw-normal">Global Crypto Stats</h4>

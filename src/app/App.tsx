@@ -14,22 +14,22 @@ import Wrapper from "../context/ContextProvider";
 function App() {
   return (
     <div className="App">
-      <ErrorBoundary>
-        <BrowserRouter basename="/cryptoverse-project">
-          <Sidebar />
+      <BrowserRouter basename="/cryptoverse-project">
+        <Sidebar />
           <div className="Route">
             <Provider store={store}>
               <Wrapper>
                 <div className="NavBar">
                   <Navbar />
                 </div>
+        <ErrorBoundary>
                 <Mainroutes />
+        </ErrorBoundary>
               </Wrapper>
               <GoToTop />
             </Provider>
           </div>
-        </BrowserRouter>
-      </ErrorBoundary>
+      </BrowserRouter>
     </div>
   );
 }

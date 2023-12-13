@@ -22,9 +22,16 @@ const RefrenceCurrency = () => {
   } = useGetReferenceCurrenciesQuery({ type: "fiat" });
 
   // define state
-  const [selectedRows, setSelectedRows] = React.useState<ReferenceCurrency[]>(
-    []
-  );
+  // const [selectedRows, setSelectedRows] = React.useState<ReferenceCurrency[]>(
+  //   []
+  // );
+  const [selectedRowsCoins, setSelectedRowsCoins] = React.useState<
+    ReferenceCurrency[]
+  >([]);
+  const [selectedRowsFiat, setSelectedRowsFiat] = React.useState<
+    ReferenceCurrency[]
+  >([]);
+
   const [data, setData] = React.useState<ReferenceCurrency[]>(
     coinData?.data?.currencies
   );
@@ -98,81 +105,104 @@ const RefrenceCurrency = () => {
   ];
 
   // Table Edit Methods coin
-  const handleChange = (state: any) => {
-    setSelectedRows(state.selectedRows);
+  // const handleChange = (state: any) => {
+  //   setSelectedRows(state.selectedRows);
+  // };
+  const handleChangeCoins = (state: any) => {
+    setSelectedRowsCoins(state.selectedRows);
   };
+
+  const handleChangeFiat = (state: any) => {
+    setSelectedRowsFiat(state.selectedRows);
+  };
+
   const handleClearRows = () => {
-    const selectedNames = selectedRows.map((el) => el.name);
-    const updatedData = data.filter((el) => !selectedNames.includes(el.name));
-    const updatedFiatData = fiatdata.filter(
-      (el) => !selectedNames.includes(el.name)
-    );
+    // const selectedNames = selectedRows.map((el) => el.name);
+     const selectedNamesCoins = selectedRowsCoins.map((el) => el.name);
+     const selectedNamesFiat = selectedRowsFiat.map((el) => el.name);
+    // const updatedData = data.filter((el) => !selectedNames.includes(el.name));
+    // const updatedFiatData = fiatdata.filter(
+    //   (el) => !selectedNames.includes(el.name)
+    // );
+   const updatedData = data.filter(
+     (el) => !selectedNamesCoins.includes(el.name)
+   );
+   const updatedFiatData = fiatdata.filter(
+     (el) => !selectedNamesFiat.includes(el.name)
+   );
+
     // Update the displayed data
     setData(updatedData);
     setFiatData(updatedFiatData);
 
     // Clear the selectedRows state
-    setSelectedRows([]);
+    // setSelectedRows([]);
+      setSelectedRowsCoins([]);
+    setSelectedRowsFiat([]);
     notify();
   };
 
   return (
-    <AsyncWrapper
-      fulfilled={Boolean(coinData && FiatData)}
-      error={errorCoin || errorFiat}
-      loading={isFetchingCoin || isFetchingFiat}
-    >
-      <div className="p-5">
-        <div className="d-flex justify-content-between">
-          <h3 className="my-3">Coin Refrence Currencies</h3>
-          {selectedRows && selectedRows.find((el) => el.type === "coin") && (
-            <i
-              className="bi bi-trash3 fs-3 Delete_btn"
-              onClick={handleClearRows}
-              data-tooltip-id="tooltip-icon-show"
-              data-tooltip-content="Are you sure you want to remove this item"
-              data-tooltip-delay-show={50}
-              data-tooltip-variant="dark"
-            ></i>
-          )}
+    <>
+      <AsyncWrapper
+        fulfilled={Boolean(coinData && FiatData)}
+        error={errorCoin || errorFiat}
+        loading={isFetchingCoin || isFetchingFiat}
+      >
+        <div className="p-5">
+          <div className="d-flex justify-content-between">
+            <h3 className="my-3">Coin Refrence Currencies</h3>
+            {selectedRowsCoins &&
+              selectedRowsCoins.find((el) => el.type === "coin") && (
+                <i
+                  className="bi bi-trash3 fs-3 Delete_btn"
+                  onClick={handleClearRows}
+                  data-tooltip-id="tooltip-icon-show"
+                  data-tooltip-content="Are you sure you want to remove this item"
+                  data-tooltip-delay-show={50}
+                  data-tooltip-variant="dark"
+                ></i>
+              )}
+          </div>
+          <DataTable
+            columns={columns}
+            data={data}
+            pagination
+            customStyles={customStyles}
+            selectableRows
+            selectableRowsHighlight
+            highlightOnHover
+            onSelectedRowsChange={handleChangeCoins}
+          />
+          <div className="d-flex justify-content-between align-items-center">
+            <h3 className="mt-5 mb-3">Fiat Refrence Currencies</h3>
+            {selectedRowsFiat &&
+              selectedRowsFiat.find((el) => el.type === "fiat") && (
+                <i
+                  className="bi bi-trash3 fs-3 Delete_btn"
+                  onClick={handleClearRows}
+                  data-tooltip-id="tooltip-icon-show"
+                  data-tooltip-content="Are you sure you want to remove this item"
+                  data-tooltip-delay-show={50}
+                  data-tooltip-variant="dark"
+                ></i>
+              )}
+          </div>
+          <DataTable
+            columns={columns}
+            data={fiatdata}
+            pagination
+            customStyles={customStyles}
+            selectableRows
+            selectableRowsHighlight
+            highlightOnHover
+            onSelectedRowsChange={handleChangeFiat}
+          />
+          <ToastContainer />
+          <Tooltip id="tooltip-icon-show" place="left" />
         </div>
-        <DataTable
-          columns={columns}
-          data={data}
-          pagination
-          customStyles={customStyles}
-          selectableRows
-          selectableRowsHighlight
-          highlightOnHover
-          onSelectedRowsChange={handleChange}
-        />
-        <div className="d-flex justify-content-between align-items-center">
-          <h3 className="mt-5 mb-3">Fiat Refrence Currencies</h3>
-          {selectedRows && selectedRows.find((el) => el.type === "fiat") && (
-            <i
-              className="bi bi-trash3 fs-3 Delete_btn"
-              onClick={handleClearRows}
-              data-tooltip-id="tooltip-icon-show"
-              data-tooltip-content="Are you sure you want to remove this item"
-              data-tooltip-delay-show={50}
-              data-tooltip-variant="dark"
-            ></i>
-          )}
-        </div>
-        <DataTable
-          columns={columns}
-          data={fiatdata}
-          pagination
-          customStyles={customStyles}
-          selectableRows
-          selectableRowsHighlight
-          highlightOnHover
-          onSelectedRowsChange={handleChange}
-        />
-        <ToastContainer />
-        <Tooltip id="tooltip-icon-show" place="left" />
-      </div>
-    </AsyncWrapper>
+      </AsyncWrapper>
+    </>
   );
 };
 export default RefrenceCurrency;

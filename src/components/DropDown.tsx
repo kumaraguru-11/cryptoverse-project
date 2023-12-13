@@ -4,12 +4,12 @@ import { Coin } from "../app/react-ts-env";
 import { userContext } from "../context/ContextProvider";
 
 const DropDown = (props: { coins: Coin[] }) => {
-  const {sortedData, setSortedData } = useContext(userContext);
+  const {setSortedData } = useContext(userContext);
 
   useEffect(()=>{
      const tempdata: Coin[] =[...props.coins]
      setSortedData(tempdata);
-  },[props.coins])
+  },[props.coins,setSortedData])
 
   const handleAscending = () => {
     const tempdata: Coin[] = [...props.coins];

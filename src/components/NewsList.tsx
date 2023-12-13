@@ -3,11 +3,11 @@ import { Feed } from "../app/react-ts-env";
 import Card from "react-bootstrap/Card";
 import { timeToX } from "../utils/day";
 
-const NewsList = (props: { feeds: [] }) => {
+const NewsList = (props: { feeds: Feed[] }) => {
   return (
     <div className="p-2">
       <div className="row">
-        {props.feeds.map((feed: Feed, index: number) => (
+        {props.feeds.length>0&&props.feeds.map((feed: Feed, index: number) => (
           <div key={index} className=" p-3 col-md-6 col-sm-6 col-lg-4">
             <a
               href={feed.url}

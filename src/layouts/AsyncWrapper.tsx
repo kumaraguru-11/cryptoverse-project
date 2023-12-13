@@ -11,9 +11,26 @@ type AsyncWrapperProps = {
 
 function AsyncWrapper(props: AsyncWrapperProps) {
   if (props.loading) {
-    return <Spinner/>
+    return <Spinner />;
   } else if (props.error) {
-    return props.error;
+    // console.error("An error occurred:", props.error);
+    return props.error ;
+    //  if (props.error.status === 404) {
+    //    return (
+    //      <div>
+    //        <h2>Resource Not Found</h2>
+    //        <p>The requested resource could not be found.</p>
+    //      </div>
+    //    );
+    //  }
+
+    //  // Handle other types of errors
+    //  return (
+    //    <div>
+    //      <h2>Something went wrong...</h2>
+    //      <p>{props.error.message || "Unknown error"}</p>
+    //    </div>
+    //  );
   } else if (props.fulfilled) {
     return props.children;
   } else {
@@ -30,4 +47,3 @@ AsyncWrapper.defaultProps = {
 };
 
 export default AsyncWrapper;
-

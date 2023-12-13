@@ -16,7 +16,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryTypes> {
   }
 
   render() {
-    if(this.state.errorInfo) {
+    if(this.state.error) {
     return (
       <>
         <h2>Somethings went wrong... </h2>

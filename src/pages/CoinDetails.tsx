@@ -24,14 +24,14 @@ const CoinDetails = () => {
     error: errorHistory,
     isLoading: isFetchingHistory,
   } = useGetCoinHistoryQuery({ coinId: params?.coinId, timePeriod });
-  const {
-    data: feeds,
-    error: feedserror,
-    isLoading: feedsLoading,
-  } = useGetFeedsQuery({
-    query: "Cryptocurrencies",
-    count: 6,
-  });
+  // const {
+  //   data: feeds,
+  //   error: feedserror,
+  //   isLoading: feedsLoading,
+  // } = useGetFeedsQuery({
+  //   query: "Cryptocurrencies",
+  //   count: 6,
+  // });
 
   const handleTimePeriodChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -40,11 +40,11 @@ const CoinDetails = () => {
   };
   return (
     <AsyncWrapper
-      loading={isLoading || isFetchingHistory || feedsLoading}
-      error={error || errorHistory || feedserror}
-      fulfilled={Boolean(data && history && feeds)}
+      loading={isLoading || isFetchingHistory}
+      error={error || errorHistory}
+      fulfilled={Boolean(data && history )}
     >
-      {Boolean(data && history && feeds) && (
+      {Boolean(data && history) && (
         <div className="py-5 px-4">
           <div className="d-flex align-items-center">
             <img
@@ -170,10 +170,10 @@ const CoinDetails = () => {
           </div>
           <Chart history={history.data.history} />
 
-          <h3 className="fw-normal my-5">Latest Crypto News</h3>
+          {/* <h3 className="fw-normal my-5">Latest Crypto News</h3>
           <div className="my-3">
             <NewsList feeds={feeds.value} />
-          </div>
+          </div> */}
         </div>
       )}
     </AsyncWrapper>
